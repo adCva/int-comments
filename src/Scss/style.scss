@@ -1,0 +1,16 @@
+@import "config";
+
+body {
+    background-color: $very-light-gray;
+    font-family: $ff-main;
+    font-size: $fs-default;
+    font-weight: $fw-regular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+
+@import "comment";
+@import "input";
