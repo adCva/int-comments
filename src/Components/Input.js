@@ -9,9 +9,17 @@ function Input() {
     const user = useSelector(state => state.comments.currentUser);
     const ids = useSelector(state => state.comments.totalIds);
     const dataFile = useSelector(state => state.comments.commentsData);
+    // *
     const reply = useSelector(state => state.actions.reply);
     const replyId = useSelector(state => state.actions.replyId);
     const replyTo = useSelector(state => state.actions.replyTo);
+    // *
+    const edit = useSelector(state => state.actions.edit);
+    const editId = useSelector(state => state.actions.editId);
+    const nestedEdit = useSelector(state => state.actions.nestedEdit);
+    const nestedEditCommentId = useSelector(state => state.actions.nestedCommentId);
+
+
     const [ comment, setComment ] = useState("");
 
     const handleChange = (e) => {
@@ -73,9 +81,11 @@ function Input() {
     return (
         <div className="input-container">
             <img src={UserAvatar} alt="User Avatar" className="user-avatar" />
-            <textarea name="comment" value={comment} placeholder="Add a comment" onChange={handleChange} ></textarea>
+            <textarea name="comment" value={edit ? "test" : comment} placeholder="Add a comment" onChange={handleChange} ></textarea>
             {reply ? (
                 <button className="send-btn" onClick={createReply}>Reply</button>
+            ) : edit ? (
+                <button className="send-btn" onClick={createComment}>Edit</button>
             ) : (
                 <button className="send-btn" onClick={createComment}>Send</button>
             )}
@@ -83,6 +93,8 @@ function Input() {
                 <img src={UserAvatar} alt="User Avatar" />
                 {reply ? (
                     <button className="send-btn mobile-send-btn" onClick={createReply}>Reply</button>
+                ) : edit ? (
+                    <button className="send-btn mobile-send-btn" onClick={createComment}>Edit</button>
                 ) : (
                     <button className="send-btn mobile-send-btn" onClick={createComment}>Send</button>
                 )}

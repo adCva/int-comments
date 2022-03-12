@@ -1,0 +1,161 @@
+.reply-input-container {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: darken($white, 2%);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    .avatar-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .user-avatar {
+            width: 35px;
+        }
+
+        .reply-To {
+            color: $grayish-blue;
+            font-size: 12px;
+            font-weight: $fw-medium;
+            letter-spacing: 0.5px;
+            user-select: none;
+    
+            span {
+                color: $moderate-blue;
+            }
+        }
+    }
+
+
+    .reply-interactive {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            border-radius: 10px;
+            padding: 0.2rem;
+            border: 2px solid #bfc0c0;
+        }
+
+        textarea {
+            background-color: darken($white, 2%);
+            color: $grayish-blue;
+            width: 100%;
+            min-width: 85%;
+            height: 50px;
+            min-height: 40px;
+            max-height: 50px;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid $light-gray;
+
+            @media (min-width: 768px) {
+                width: 85%;
+                border: none;
+            }
+        }
+
+
+        .reply-btns-container {
+            margin-top: 2rem;
+            font-size: 30px;
+
+            @media (min-width: 768px) {
+                margin-top: 0.2rem;
+            }
+
+            .send-reply-btn {
+                background: none;
+                color: #81b29a;
+                margin-right: 2rem;
+
+                @media (min-width: 768px) {
+                    margin-right: 1rem;
+                }
+            }
+
+            .close-reply-btn {
+                background: none;
+                color: #ff758f;
+            }
+        }
+    }
+}
+
+
+/*
+.reply-input-container {
+    width: 95%;
+    margin: 0 auto;
+
+
+    .reply-interactive-container {
+        @media (min-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+    
+        textarea {
+            background-color: darken($white, 2%);
+            width: 100%;
+            min-width: 200px;
+            max-width: 500px;
+            height: 90px;
+            min-height: 60px;
+            max-height: 100px;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid $light-gray;
+        }
+    
+        .send-btn {
+            display: none;
+            background-color: $moderate-blue;
+            color: $white;
+            padding: 0.5rem 1rem;
+            font-weight: $fw-medium;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+    
+            &:hover {
+                background-color: lighten($moderate-blue, 12%);
+            }
+    
+            @media (min-width: 768px) {
+                display: initial;
+                padding: 0.7rem 1.2rem;
+            }
+        }
+    
+        .mobile-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+    
+            @media (min-width: 768px) {
+                display: none;
+            }
+    
+            img {
+                width: 45px;
+            }
+    
+            .mobile-send-btn {
+                display: initial;
+            }
+        }
+    }
+}
+*/

@@ -5,12 +5,17 @@ import DeleteIcon from "../Assets/icon-delete.svg";
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment } from "../Features/dataSlice";
 import { startReply } from "../Features/actionSlice";
+import {startEdit } from "../Features/editSlice";
+import Reply from './Reply';
+import Edit from './Edit';
 
 function Comment() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.comments.currentUser);
     const dataFile = useSelector(state => state.comments.commentsData.comments);
-
+    const editId = useSelector(state => state.edit.editId);
+    const replyId = useSelector(state => state.actions.editId);
+    const replyIdd = useSelector(state => state.actions.replyId);
 
     const deleteSelectedComment = (id) => {
         let confirmChoice = window.confirm("Are you sure you want to delete this comment?");
@@ -54,8 +59,12 @@ function Comment() {
     }
 
 
-    const startEdit = (editId, nested, nestedCommentId) => {
-
+    const openEdit = (nested, nestedId, elementId, textToEdit) => {
+        if (nested) {
+            dispatch(startEdit({id: elementId, isNested: nested, nestedComId: nestedId, text: textToEdit}));
+        } else {
+            dispatch(startEdit({id: elementId, isNested: false, nestedComId: null, text: textToEdit}));
+        }
     }
 
 
@@ -82,7 +91,7 @@ function Comment() {
                             {el.user.username === user.username ? (
                                 <div className="user-interaction">
                                     <button className="delete-btn" onClick={() => deleteSelectedComment(el.id)}><img src={DeleteIcon} alt="Arrow" /> Delete</button>
-                                    <button className="edit-btn"><img src={EditIcon} alt="Arrow" /> Edit</button>
+                                    <button className="edit-btn" onClick={() => openEdit(el.id, false, null, el.content)}><img src={EditIcon} alt="Arrow" /> Edit</button>
                                 </div>
                             ) : (
                                 <button className="reply-btn" onClick={() => addReply(el.id, el.user.username)}><img src={ReplyIcon} alt="Arrow" /> Reply</button>
@@ -104,13 +113,17 @@ function Comment() {
                                                 <img src={rep.user.image} alt="Avatar" />
                                                 <h1>{rep.user.username}</h1>
                                                 <p>{rep.createdAt}</p>    
-                                            </div>   
-                                            <p className="main-comment"><span className="reply-To">@{rep.replyingTo}</span> {rep.content}</p>  
+                                            </div>
+                                            {editId === rep.id ? (
+                                                <Edit />
+                                            ) : (
+                                                <p className="main-comment"><span className="reply-To">@{rep.replyingTo}</span> {rep.content}</p> 
+                                            )}
                                         </div>
                                             {rep.user.username === user.username ? (
                                                 <div className="user-interaction">
                                                     <button className="delete-btn" onClick={() => deleteSelectedReply(el.id, rep.id)}><img src={DeleteIcon} alt="Arrow" /> Delete</button>
-                                                    <button className="edit-btn"><img src={EditIcon} alt="Arrow" /> Edit</button>
+                                                    <button className="edit-btn" onClick={() => openEdit(rep.id, true, el.id, rep.content)}><img src={EditIcon} alt="Arrow" /> Edit</button>
                                                 </div>
                                             ) : (
                                                 <button className="reply-btn" onClick={() => addReply(el.id, rep.user.username)}><img src={ReplyIcon} alt="Arrow" /> Reply</button>
@@ -119,6 +132,10 @@ function Comment() {
                                 </div>
                             )
                         })
+                    ) : null}
+                    
+                    {replyIdd === el.id ? (
+                        <Reply />
                     ) : null}
                 </div>
             )

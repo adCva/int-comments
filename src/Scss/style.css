@@ -322,4 +322,191 @@ body {
 .input-container .mobile-container .mobile-send-btn {
   display: initial;
 }
+
+.reply-input-container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #fafafa;
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.reply-input-container .avatar-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+
+.reply-input-container .avatar-container .user-avatar {
+  width: 35px;
+}
+
+.reply-input-container .avatar-container .reply-To {
+  color: #67727e;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.reply-input-container .avatar-container .reply-To span {
+  color: #5457b6;
+}
+
+.reply-input-container .reply-interactive {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .reply-input-container .reply-interactive {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    border-radius: 10px;
+    padding: 0.2rem;
+    border: 2px solid #bfc0c0;
+  }
+}
+
+.reply-input-container .reply-interactive textarea {
+  background-color: #fafafa;
+  color: #67727e;
+  width: 100%;
+  min-width: 85%;
+  height: 50px;
+  min-height: 40px;
+  max-height: 50px;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid #eaecf1;
+}
+
+@media (min-width: 768px) {
+  .reply-input-container .reply-interactive textarea {
+    width: 85%;
+    border: none;
+  }
+}
+
+.reply-input-container .reply-interactive .reply-btns-container {
+  margin-top: 2rem;
+  font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  .reply-input-container .reply-interactive .reply-btns-container {
+    margin-top: 0.2rem;
+  }
+}
+
+.reply-input-container .reply-interactive .reply-btns-container .send-reply-btn {
+  background: none;
+  color: #81b29a;
+  margin-right: 2rem;
+}
+
+@media (min-width: 768px) {
+  .reply-input-container .reply-interactive .reply-btns-container .send-reply-btn {
+    margin-right: 1rem;
+  }
+}
+
+.reply-input-container .reply-interactive .reply-btns-container .close-reply-btn {
+  background: none;
+  color: #ff758f;
+}
+
+/*
+.reply-input-container {
+    width: 95%;
+    margin: 0 auto;
+
+
+    .reply-interactive-container {
+        @media (min-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+    
+        textarea {
+            background-color: darken($white, 2%);
+            width: 100%;
+            min-width: 200px;
+            max-width: 500px;
+            height: 90px;
+            min-height: 60px;
+            max-height: 100px;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid $light-gray;
+        }
+    
+        .send-btn {
+            display: none;
+            background-color: $moderate-blue;
+            color: $white;
+            padding: 0.5rem 1rem;
+            font-weight: $fw-medium;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+    
+            &:hover {
+                background-color: lighten($moderate-blue, 12%);
+            }
+    
+            @media (min-width: 768px) {
+                display: initial;
+                padding: 0.7rem 1.2rem;
+            }
+        }
+    
+        .mobile-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+    
+            @media (min-width: 768px) {
+                display: none;
+            }
+    
+            img {
+                width: 45px;
+            }
+    
+            .mobile-send-btn {
+                display: initial;
+            }
+        }
+    }
+}
+*/
 /*# sourceMappingURL=style.css.map */
