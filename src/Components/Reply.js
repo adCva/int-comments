@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { RiSendPlaneFill, RiCloseCircleFill } from "react-icons/ri";
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { addReply } from "../Features/dataSlice";
-import { endReply } from "../Features/actionSlice";
+import { startReply } from "../Features/replySlice";
+import { endReply } from "../Features/replySlice";
 
 function Reply() {
     // =================== Redux state & dispatch.
@@ -13,8 +13,8 @@ function Reply() {
     const totalIds = useSelector(state => state.comments.totalIds);
     const activeUser = useSelector(state => state.user.activeUser);
     // Reply state.
-    const replyId = useSelector(state => state.actions.replyId);
-    const replyTo = useSelector(state => state.actions.replyTo);
+    const replyId = useSelector(state => state.reply.replyId);
+    const replyTo = useSelector(state => state.reply.replyTo);
 
     // =================== Local state & ref.
     const [ replyText, setReplyText ] = useState("");
@@ -28,6 +28,7 @@ function Reply() {
 
 
     const createReply = () => {
+        console.log("test");
         let duplicateData = objectData.comments.slice(0);
         let mainComment = duplicateData.filter(el => el.id === replyId)[0];
         const newReply = {
@@ -57,7 +58,7 @@ function Reply() {
         }
 
         duplicateData.splice(duplicateData.indexOf(mainComment), 1, newObject)
-        dispatch(addReply({data: duplicateData}));
+        dispatch(startReply({data: duplicateData}));
         dispatch(endReply());
     }
 

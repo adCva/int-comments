@@ -4,7 +4,7 @@ import EditIcon from "../Assets/icon-edit.svg";
 import DeleteIcon from "../Assets/icon-delete.svg";
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment } from "../Features/dataSlice";
-import { startReply } from "../Features/actionSlice";
+import { startReply } from "../Features/replySlice";
 import {startEdit } from "../Features/editSlice";
 import Reply from './Reply';
 import Edit from './Edit';
@@ -14,8 +14,8 @@ function Comment() {
     const user = useSelector(state => state.comments.currentUser);
     const dataFile = useSelector(state => state.comments.commentsData.comments);
     const editId = useSelector(state => state.edit.editId);
-    const replyId = useSelector(state => state.actions.editId);
-    const replyIdd = useSelector(state => state.actions.replyId);
+    const replyId = useSelector(state => state.reply.editId);
+    const replyIdd = useSelector(state => state.reply.replyId);
 
     const deleteSelectedComment = (id) => {
         let confirmChoice = window.confirm("Are you sure you want to delete this comment?");

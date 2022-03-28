@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import UserAvatar from "../Assets/image-juliusomo.png";
 import { useSelector, useDispatch } from 'react-redux';
 import { addComment, addReply } from "../Features/dataSlice";
-import { endReply } from "../Features/actionSlice";
+import { endReply } from "../Features/replySlice";
 
 function Input() {
     const dispatch = useDispatch();
@@ -10,14 +10,14 @@ function Input() {
     const ids = useSelector(state => state.comments.totalIds);
     const dataFile = useSelector(state => state.comments.commentsData);
     // *
-    const reply = useSelector(state => state.actions.reply);
-    const replyId = useSelector(state => state.actions.replyId);
-    const replyTo = useSelector(state => state.actions.replyTo);
+    const reply = useSelector(state => state.reply.reply);
+    const replyId = useSelector(state => state.reply.replyId);
+    const replyTo = useSelector(state => state.reply.replyTo);
     // *
-    const edit = useSelector(state => state.actions.edit);
-    const editId = useSelector(state => state.actions.editId);
-    const nestedEdit = useSelector(state => state.actions.nestedEdit);
-    const nestedEditCommentId = useSelector(state => state.actions.nestedCommentId);
+    const edit = useSelector(state => state.edit.edit);
+    const editId = useSelector(state => state.edit.editId);
+    const nestedEdit = useSelector(state => state.edit.nestedEdit);
+    const nestedEditCommentId = useSelector(state => state.edit.nestedCommentId);
 
 
     const [ comment, setComment ] = useState("");
