@@ -12,12 +12,14 @@ export const editSlice = createSlice({
 
     reducers: {
       startEdit: (state, action) => {
-        console.log(action.payload.text);
         state.edit = true;
         state.editId = action.payload.id;
         state.nestedEdit = action.payload.isNested;
         state.nestedCommentId = action.payload.nestedComId;
-        state.textToBeEdited = action.payload.text;
+      },
+      startSimpleEdit : (state, action) => {
+        state.edit = true;
+        state.editId = action.payload.id;
       },
       endEdit: state => {
         state.edit = false;
@@ -30,6 +32,6 @@ export const editSlice = createSlice({
 })
 
 
-export const { startEdit, endEdit } = editSlice.actions;
+export const { startEdit, startSimpleEdit, endEdit } = editSlice.actions;
 
 export default editSlice.reducer;

@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const dataSlice = createSlice({
-    name: "dataSlice",
+export const commentSlice = createSlice({
+    name: "commentSlice",
     initialState: {
-        currentUser: {
-            username: "juliusomo",
-            image: "./images/avatars/image-juliusomo.png"
-        },
         totalIds: 4,
+        liked: false,
+        disliked: false,
         commentsData: {comments: [
             {
               "id": 1,
@@ -58,36 +56,43 @@ export const dataSlice = createSlice({
     },
 
     reducers: {
-      addComment: (state, action) => {
-        let newComments = action.payload.data;
-        let newTotalIds = state.totalIds + 1
+        addComment: (state, action) => {
+          let newComments = action.payload.data;
+          let newTotalIds = state.totalIds + 1
+  
+          return {
+            ...state,
+            totalIds: newTotalIds,
+            commentsData: newComments
+          }
+        },
+        addReply: (state, action) => {
+          let newComments = {comments: action.payload.data};
+  
+          return {
+            ...state,
+            commentsData: newComments
+          }
+        },
+        deleteComment : (state, action) => {
+          let newComments = {comments: action.payload.data};
+  
+          return {
+            ...state,
+            commentsData: newComments
+          }
+        },
+        editComment: (state, action) => {
+          let newComments = action.payload.data;
 
-        return {
-          ...state,
-          totalIds: newTotalIds,
-          commentsData: newComments
+          return {
+            ...state,
+            commentsData: newComments
+          }
         }
-      },
-      addReply: (state, action) => {
-        let newComments = {comments: action.payload.data};
-
-        return {
-          ...state,
-          commentsData: newComments
-        }
-      },
-      deleteComment : (state, action) => {
-        let newComments = {comments: action.payload.data};
-
-        return {
-          ...state,
-          commentsData: newComments
-        }
-      }
     }
 })
 
+export const { addComment, addReply, deleteComment, editComment } = commentSlice.actions;
 
-export const { addComment, addReply, deleteComment } = dataSlice.actions;
-
-export default dataSlice.reducer;
+export default commentSlice.reducer;
