@@ -1,0 +1,46 @@
+.identifiers-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+        width: 33px;
+    }
+
+    h1 {
+        color: $dark-blue;
+        font-weight: $fw-bold;
+        letter-spacing: 0.2px;
+        font-size: 0.9rem;
+
+        @media (min-width: 768px) {
+            font-size: 1rem;
+        }
+    }
+
+    .highline {
+        background-color: $moderate-blue;
+        color: $white;
+        font-size: 0.6rem;
+        font-weight: $fw-medium;
+        padding: 0.2rem 0.4rem 0.25rem;
+        border-radius: 5px;
+        user-select: none;
+
+        @media (min-width: 768px) {
+            font-size: 0.7rem;
+        }
+    }
+
+    p {
+        color: $grayish-blue;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        user-select: none;
+
+        @media (min-width: 768px) {
+            font-size: 0.9rem;
+        }
+    }
+}

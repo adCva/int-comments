@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-// ========= React Spring.
-import { useTransition, animated } from 'react-spring';
 import Reply from './Reply';
-// ========= Redux.
+import Likes from "./Likes";
+import Identifier from "./Identifier";
+// =========== Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { startReply } from "../Features/replySlice";
 import { startEdit, startSimpleEdit, endEdit } from "../Features/editSlice";
@@ -149,6 +149,8 @@ function Comment() {
       dispatch(editComment({data: resault}));
     }
   }
+
+
   const addNestedLike = (mainId, nestedId) => {
     let duplicateData = comments.slice(0);
     let targetElement = duplicateData.filter(el => el.id === mainId)[0];
@@ -299,19 +301,12 @@ const deleteSelectedComment = (id) => {
           <div className="comment-wrapper" key={i}>
             <div className="comment-details-container">
               {/* ============= Likes & Dislikes ============= */}
-              <div className="likes-interactive">
-                <button className="engagement-btn" onClick={() => addLike(comment.id)}>+</button>
-                <p className="counter">{comment.score}</p>    
-                <button className="engagement-btn" onClick={() => dislike(comment.id)}>-</button>    
-              </div>
+              <Likes commentScore={comment.score} commentId={comment.id} isCommentNested={false} nestedId={null} interacted={comment.peopleWhoLiked.includes(activeUser.username) ? "like" : comment.peopleWhoDisliked.includes(activeUser.username) ? "dislike" : ""} createdBy={comment.user.username}/>
+
 
               {/* ============= Main Comment Text ============= */}
               <div className="comment-text">
-                <div className="identifiers">
-                  <img src={comment.user.image} alt="Avatar" />
-                  <h1>{comment.user.username}</h1>
-                  <p>{comment.createdAt}</p>    
-                </div>
+                <Identifier userAvatar={comment.user.image} creatorUsername={comment.user.username} elapsedTime={comment.createdAt} />
                 {editStarted && editId === comment.id ? (
                   <textarea defaultValue={comment.content} onChange={handleChange}></textarea>
                 ) : (
@@ -349,19 +344,18 @@ const deleteSelectedComment = (id) => {
                   <div className="replies-wrapper" key={j}>
                     <div className="reply-container">
                       {/* ============= Likes & Dislikes ============= */}
-                      <div className="likes-interactive">
-                        <button className="engagement-btn" onClick={() => addNestedLike(comment.id, reply.id)}>+</button>
-                        <p className="counter">{reply.score}</p>    
-                        <button className="engagement-btn" onClick={() => addNestedDislike(comment.id, reply.id)}>-</button>    
-                      </div>
+                      {/*
+                        <div className="likes-interactive">
+                          <button className="engagement-btn" onClick={() => addNestedLike(comment.id, reply.id)}>+</button>
+                          <p className="counter">{reply.score}</p>    
+                          <button className="engagement-btn" onClick={() => addNestedDislike(comment.id, reply.id)}>-</button>    
+                        </div>    
+                      */}
+                      <Likes commentScore={reply.score} commentId={comment.id} isCommentNested={true} nestedId={reply.id} interacted={reply.peopleWhoLiked.includes(activeUser.username) ? "like" : reply.peopleWhoDisliked.includes(activeUser.username) ? "dislike" : ""} createdBy={reply.user.username} />
                     
                       {/* ============= Main Comment Text ============= */}
                       <div className="comment-text">
-                        <div className="identifiers">
-                          <img src={reply.user.image} alt="Avatar" />
-                          <h1>{reply.user.username}</h1>
-                          <p>{reply.createdAt}</p>    
-                        </div>
+                        <Identifier userAvatar={reply.user.image} creatorUsername={reply.user.username} elapsedTime={reply.createdAt} />
                         {nestedEdit && nestedCommentId === reply.id ? (
                           <textarea defaultValue={reply.content} onChange={handleChange}></textarea>
                         ) : (

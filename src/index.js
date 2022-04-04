@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// Redux.
+// =========== Redux.
 import Store from "./Store";
 import { Provider } from 'react-redux';
+
 
 
 ReactDOM.render(

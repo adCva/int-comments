@@ -538,4 +538,145 @@ body {
 .nested-reply {
   margin-top: 1rem;
 }
+
+.likes-container {
+  background-color: #eaecf1;
+  color: #5457b6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 110px;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  /* ============== Buttons ============== */
+  /* ============== Counter ============== */
+}
+
+@media (min-width: 768px) {
+  .likes-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 115px;
+    height: 90px;
+    font-size: 1rem;
+  }
+}
+
+.likes-container .engagement-btn {
+  background: none;
+  color: #a6a8d9;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.likes-container .engagement-btn:hover {
+  color: #030308;
+}
+
+.likes-container .engagement-btn-interacted {
+  color: #030308;
+}
+
+.likes-container .engagement-btn-disabled {
+  color: #d1d2eb;
+  cursor: default;
+  pointer-events: none;
+}
+
+.likes-container p {
+  margin: 0 1.2rem;
+  letter-spacing: 1px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+@media (min-width: 768px) {
+  .likes-container p {
+    margin: 0.85rem 0;
+    letter-spacing: 1.4px;
+  }
+}
+
+.identifiers-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+
+.identifiers-container img {
+  width: 33px;
+}
+
+.identifiers-container h1 {
+  color: #324152;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .identifiers-container h1 {
+    font-size: 1rem;
+  }
+}
+
+.identifiers-container .highline {
+  background-color: #5457b6;
+  color: #ffffff;
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.2rem 0.4rem 0.25rem;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+@media (min-width: 768px) {
+  .identifiers-container .highline {
+    font-size: 0.7rem;
+  }
+}
+
+.identifiers-container p {
+  color: #67727e;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+@media (min-width: 768px) {
+  .identifiers-container p {
+    font-size: 0.9rem;
+  }
+}
 /*# sourceMappingURL=style.css.map */

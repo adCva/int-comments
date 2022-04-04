@@ -16,7 +16,9 @@ export const commentSlice = createSlice({
                   "image": "./images/avatars/image-amyrobson.png",
                   "username": "amyrobson"
               },
-              "replies": []
+              "replies": [],
+              "peopleWhoLiked": [],
+              "peopleWhoDisliked": []
               },
               {
                 "id": 2,
@@ -37,7 +39,9 @@ export const commentSlice = createSlice({
                     "user": {
                       "image": "./images/avatars/image-ramsesmiron.png",
                       "username": "ramsesmiron"
-                    }
+                    },
+                    "peopleWhoLiked": [],
+                    "peopleWhoDisliked": []
                   },
                   {
                     "id": 4,
@@ -48,9 +52,13 @@ export const commentSlice = createSlice({
                     "user": {
                       "image": "./images/avatars/image-juliusomo.png",
                       "username": "juliusomo"
-                    }
+                    },
+                    "peopleWhoLiked": [],
+                    "peopleWhoDisliked": []
                   }
-                ]
+                ],
+                "peopleWhoLiked": [],
+                "peopleWhoDisliked": []
               }
         ]}
     },
@@ -89,10 +97,30 @@ export const commentSlice = createSlice({
             ...state,
             commentsData: newComments
           }
+        },
+        addLike: (state, action) => {
+          let newComments = action.payload.data;
+
+          return {
+            ...state,
+            liked: true,
+            disliked: false,
+            commentsData: newComments
+          }
+        },
+        substractLike: (state, action) => {
+          let newComments = action.payload.data;
+
+          return {
+            ...state,
+            liked: false,
+            disliked: true,
+            commentsData: newComments
+          }
         }
     }
 })
 
-export const { addComment, addReply, deleteComment, editComment } = commentSlice.actions;
+export const { addComment, addReply, deleteComment, editComment, addLike, substractLike } = commentSlice.actions;
 
 export default commentSlice.reducer;

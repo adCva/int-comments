@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+// =========== Slice components.
 import userSlice from "./Features/userSlice";
 import commentSlice from "./Features/commentSlice";
 import replySlice from "./Features/replySlice";
 import editSlice from "./Features/editSlice";
+
+
 
 export default configureStore({
     reducer: {
@@ -11,4 +14,4 @@ export default configureStore({
         reply: replySlice,
         edit: editSlice
     }
-})
+});
