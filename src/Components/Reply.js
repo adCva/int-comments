@@ -4,6 +4,7 @@ import { MdCancel } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
 import { endReply } from "../Features/replySlice";
 import { changeCommentObject } from "../Features/commentSlice";
+import { openSimplePop } from "../Features/deleteSlice";
 
 
 function Reply(props) {
@@ -31,14 +32,8 @@ function Reply(props) {
   // ==================================== Cancel reply, close interactive text box. ====================================
   const closeReply = () => {
     if (replyText.length > 0) {
-      // ======================== User wants to close box when there is text present.
-      let confirmChoice = window.confirm("Are you sure you want to delete this comment? All progress will be lost");
-      if (confirmChoice) {
-        dispatch(endReply())
-        setReplyText("");
-      }
+      dispatch(openSimplePop());
     } else {
-      // ======================== Direct close box.
       dispatch(endReply());
       setReplyText("");
     }
@@ -46,7 +41,7 @@ function Reply(props) {
 
 
 
-    // ==================================== Create & submit reply. ====================================
+  // ==================================== Create & submit reply. ====================================
   const createReply = () => {
     let duplicateData = commentsData.comments.slice(0);
     let parentElement = duplicateData.filter(el => el.id === replyId)[0];
@@ -104,8 +99,12 @@ function Reply(props) {
 
             {/* ============= Buttons ============= */}
             <div className="action-container action-container-column">
-            <button className="action-btn cancel-btn" onClick={closeReply}><span><MdCancel /></span>Cancel</button>
-              <button className="action-btn confirm-btn" onClick={createReply}>Reply</button>
+              <button className="action-btn cancel-btn" onClick={closeReply}><span><MdCancel /></span>Cancel</button>
+              {replyText.length > 0 ? (
+                <button className="action-btn confirm-btn" onClick={createReply}>Reply</button>
+              ) : (
+                <button className="action-btn confirm-btn disabled-btn">Reply</button>
+              )}
             </div>
         </div>
     </div>

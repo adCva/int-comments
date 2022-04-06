@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { startReply } from "../Features/replySlice";
 import { changeCommentObject } from "../Features/commentSlice";
 import { startEdit, startNestedEdit, endEdit } from "../Features/editSlice";
+import { openPopUp } from "../Features/deleteSlice";
 
 
 
@@ -31,37 +32,7 @@ function Action(props) {
 
   // ==================================== Delete post. ====================================
   const deletePost = (nestedBoolean, postId, nestedPostId) => {
-    let confirmChoice = window.confirm("Are you sure you want to delete this comment?");
-
-    if (confirmChoice) {
-      if (nestedBoolean) {
-        // ======================== Nested post.
-        let duplicateData = commentsData.slice(0);
-        let mainComment = duplicateData.filter(el => el.id === postId)[0];
-
-        const updatedElement = {
-          "id": mainComment.id,
-          "content": mainComment.content,
-          "createdAt": mainComment.createdAt,
-          "score": mainComment.score,
-          "user": {
-              "image": mainComment.user.image,
-              "username": mainComment.user.username
-          },
-          "replies": duplicateData.filter(el => el.id === postId)[0].replies.filter(rep => rep.id !== nestedPostId),
-          "peopleWhoLiked": mainComment.peopleWhoLiked,
-          "peopleWhoDisliked": mainComment.peopleWhoDisliked
-        }
-      
-        duplicateData.splice(duplicateData.indexOf(mainComment), 1, updatedElement);
-        dispatch(changeCommentObject({data: {comments: duplicateData}}));
-
-      } else {
-        // ======================== Surface post.
-        // let updatedCommentsObj =  commentsData.filter(el => el.id !== postId);
-        dispatch(changeCommentObject({data: {comments: commentsData.filter(el => el.id !== postId)}}));
-      }
-    }
+    dispatch(openPopUp({isNested: nestedBoolean, mainId: postId, secondId: nestedPostId}));
   }
 
 
@@ -157,13 +128,13 @@ function Action(props) {
   return (
     editStarted && editPostId === props.postId ? (
       /* ===== Update/Cancel buttons for normal comment ===== */
-      <div className="action-container action-container-column">
+      <div className="action-container">
         <button className="action-btn cancel-btn" onClick={cancelEditing}><span><MdCancel /></span>Cancel</button>
         <button className="action-btn confirm-btn" onClick={() => confirmEditing(props.isNested, props.editedText)}>Update</button>
       </div>
     ) : nestedEditStarted && nestedPostId === props.nestedId ? (
       /* ===== Update/Cancel buttons for nested comment ===== */
-      <div className="action-container action-container-column">
+      <div className="action-container">
         <button className="action-btn cancel-btn" onClick={cancelEditing}><span><MdCancel /></span>Cancel</button>
         <button className="action-btn confirm-btn" onClick={() => confirmEditing(props.isNested, props.editedText)}>Update</button>
       </div>

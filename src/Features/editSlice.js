@@ -6,7 +6,8 @@ export const editSlice = createSlice({
         edit: false,
         editId: null,
         nestedEdit: false,
-        nestedCommentId: null
+        nestedCommentId: null,
+        textToBeEdited: ""
     },
 
     reducers: {

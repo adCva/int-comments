@@ -74,9 +74,11 @@ export const commentSlice = createSlice({
         },
         changeCommentObject: (state, action) => {
           let newComments = action.payload.data;
+          let newTotalIds = state.totalIds + 1
   
           return {
             ...state,
+            totalIds: newTotalIds,
             commentsData: newComments
           }
         }

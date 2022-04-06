@@ -22,21 +22,25 @@ function Input() {
 
     // ==================================== Create comment. ====================================
     const createComment = () => {
-        const newComment = {
-            "id": totalIds + 1,
-            "content": comment,
-            "createdAt": "Today",
-            "score": 0,
-            "user": {
-                "image": activeUser.image,
-                "username": activeUser.username
-            },
-            "replies": [],
-            "peopleWhoLiked": [],
-            "peopleWhoDisliked": []
+        if (comment.length > 0) {
+            const newComment = {
+                "id": totalIds + 1,
+                "content": comment,
+                "createdAt": "Today",
+                "score": 0,
+                "user": {
+                    "image": activeUser.image,
+                    "username": activeUser.username
+                },
+                "replies": [],
+                "peopleWhoLiked": [],
+                "peopleWhoDisliked": []
+            }
+            dispatch(addComment({data: {comments: [...commentsData.comments, newComment]}}));
+            setComment("");
+        } else {
+            return null;
         }
-        dispatch(addComment({data: {comments: [...commentsData.comments, newComment]}}));
-        setComment("");
     };
 
 
@@ -48,11 +52,19 @@ function Input() {
         {/* ============= Textarea ============= */}
         <textarea name="comment" value={comment} placeholder="Add a comment" onChange={handleChange} ></textarea>
         {/* ============= Send button, for big screens ============= */}
-        <button className="send-btn" onClick={createComment}>Send</button>
+        {comment.length > 0 ? (
+            <button className="send-btn" onClick={createComment}>Send</button>
+        ) : (
+            <button className="send-btn disabled-send-btn" disabled>Send</button>
+        )}
         {/* ============= Avatar & send button for mobile ============= */}
         <div className="mobile-container">
             <img src={activeUser.image} alt="User Avatar" />
-            <button className="send-btn mobile-send-btn" onClick={createComment}>Send</button>
+            {comment.length > 0 ? (
+                <button className="send-btn mobile-send-btn" onClick={createComment}>Send</button>
+            ) : (
+                <button className="send-btn mobile-send-btn disabled-send-btn" disabled>Send</button>
+            )}
         </div>
     </div>
   )

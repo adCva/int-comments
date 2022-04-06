@@ -1,7 +1,7 @@
 .input-container {
     width: 90%;
-    max-width: 750px;
-    margin: 3rem auto 0;
+    max-width: 850px;
+    margin: 2rem auto 0;
     padding: 1rem;
     background-color: $white;
     border-radius: 10px;
@@ -11,7 +11,6 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 1rem;
     }
 
     .user-avatar {
@@ -32,7 +31,8 @@
         max-height: 100px;
         padding: 1rem;
         border-radius: 10px;
-        border: 2px solid $light-gray;
+        border: 1px solid $grayish-blue;
+        outline: none;
     }
 
     .send-btn {
@@ -54,6 +54,15 @@
         @media (min-width: 768px) {
             display: initial;
             padding: 0.7rem 1.2rem;
+        }
+    }
+
+    .disabled-send-btn {
+        background-color: darken($light-gray, 20%);
+        cursor: default;
+
+        &:hover {
+            background-color: darken($light-gray, 20%);
         }
     }
 

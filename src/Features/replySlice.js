@@ -6,7 +6,7 @@ export const replySlice = createSlice({
         replyId: null,
         nestedReplyId: null,
         replyTo: "",
-        purpose: null
+        purpose: null,
     },
 
     reducers: {
