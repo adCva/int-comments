@@ -11,10 +11,10 @@ function Identifier(props) {
 
   return (
     <div className="identifiers-container">
-        <img src={props.userAvatar} alt="Avatar" />
-        <h1>{props.creatorUsername}</h1>
-        {props.creatorUsername === activeUser.username ? (<span className="highline">you</span>) : null}
-        <p>{props.elapsedTime}</p>   
+      <img src={props.userAvatar} alt="Avatar" />
+      <h1>{props.creatorUsername}</h1>
+      {props.creatorUsername === activeUser.username ? (<span className="highline">you</span>) : null}
+      <p>{props.elapsedTime}</p>   
     </div>
   )
 }

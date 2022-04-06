@@ -1,48 +1,56 @@
 import React, { useState } from 'react';
+import { MdCancel } from "react-icons/md";
 // ========= Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { endReply } from "../Features/replySlice";
-import { addReply } from "../Features/commentSlice";
+import { changeCommentObject } from "../Features/commentSlice";
 
 
 function Reply(props) {
+  // ================== Redux dispatch,state & local state.
   const dispatch = useDispatch();
-
-  // ================== Redux state.
+  // ===== Reply state.
   const replyId = useSelector(state => state.reply.replyId);
   const replyTo = useSelector(state => state.reply.replyTo);
+  // ===== General state.
   const commentsData = useSelector(state => state.comments.commentsData);
   const totalIds = useSelector(state => state.comments.totalIds);
   const activeUser = useSelector(state => state.user.activeUser);
-
-
+  // ===== Local state.
   const [ replyText, setReplyText ] = useState("");
 
-  const closeReply = () => {
-    if (replyText.length > 0) {
-      let confirmChoice = window.confirm("Are you sure you want to delete this comment? All progress will be lost");
-
-      if (confirmChoice) {
-        dispatch(endReply())
-        setReplyText("");
-      }
-    } else {
-      dispatch(endReply());
-      setReplyText("");
-    }
-  }
 
 
+  // ==================================== Handle local state change, textarea. ====================================
   const handleChange = (event) => {
     setReplyText(event.target.value);
   }
 
 
 
+  // ==================================== Cancel reply, close interactive text box. ====================================
+  const closeReply = () => {
+    if (replyText.length > 0) {
+      // ======================== User wants to close box when there is text present.
+      let confirmChoice = window.confirm("Are you sure you want to delete this comment? All progress will be lost");
+      if (confirmChoice) {
+        dispatch(endReply())
+        setReplyText("");
+      }
+    } else {
+      // ======================== Direct close box.
+      dispatch(endReply());
+      setReplyText("");
+    }
+  }
+
+
+
+    // ==================================== Create & submit reply. ====================================
   const createReply = () => {
     let duplicateData = commentsData.comments.slice(0);
-    let mainComment = duplicateData.filter(el => el.id === replyId)[0];
-    console.log(mainComment);
+    let parentElement = duplicateData.filter(el => el.id === replyId)[0];
+
     const newReply = {
         "id": totalIds + 1,
         "content": replyText,
@@ -52,25 +60,27 @@ function Reply(props) {
         "user": {
             "image": activeUser.image,
             "username": activeUser.username
-        }
-    }
-    let mainReplies = [...mainComment.replies, newReply]
-    console.log(mainReplies);
-
-    const newObject = {
-        "id": mainComment.id,
-        "content": mainComment.content,
-        "createdAt": mainComment.createdAt,
-        "score": mainComment.score,
-        "user": {
-            "image": mainComment.user.image,
-            "username": mainComment.user.username
         },
-        "replies": mainReplies
+        "peopleWhoLiked": [],
+        "peopleWhoDisliked": []
     }
 
-    duplicateData.splice(duplicateData.indexOf(mainComment), 1, newObject)
-    dispatch(addReply({data: duplicateData}));
+    const updatedParentObject = {
+        "id": parentElement.id,
+        "content": parentElement.content,
+        "createdAt": parentElement.createdAt,
+        "score": parentElement.score,
+        "user": {
+            "image": parentElement.user.image,
+            "username": parentElement.user.username
+        },
+        "replies": [...parentElement.replies, newReply],
+        "peopleWhoLiked": parentElement.peopleWhoLiked,
+        "peopleWhoDisliked": parentElement.peopleWhoDisliked
+    }
+
+    duplicateData.splice(duplicateData.indexOf(parentElement), 1, updatedParentObject)
+    dispatch(changeCommentObject({data: {comments: duplicateData}}));
     dispatch(endReply());
     setReplyText("");
   }
@@ -93,9 +103,9 @@ function Reply(props) {
             <img src="./images/avatars/image-juliusomo.png" alt="User Avatar" className="user-avatar-small" />
 
             {/* ============= Buttons ============= */}
-            <div className="reply-buttons">
-                <button className="send-reply-btn" onClick={createReply}>Reply</button>
-                <button className="close-reply-btn" onClick={closeReply}>Close</button>
+            <div className="action-container action-container-column">
+            <button className="action-btn cancel-btn" onClick={closeReply}><span><MdCancel /></span>Cancel</button>
+              <button className="action-btn confirm-btn" onClick={createReply}>Reply</button>
             </div>
         </div>
     </div>

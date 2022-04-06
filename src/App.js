@@ -12,7 +12,8 @@ import Action from "./Components/Action";
 function App() {
   return (
     <div className="App">
-      <Action />
+      <Comment />
+      <Input />
     </div>
   );
 }

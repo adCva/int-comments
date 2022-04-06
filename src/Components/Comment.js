@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { startReply } from "../Features/replySlice";
 import { startEdit, startSimpleEdit, endEdit } from "../Features/editSlice";
 import { editComment, deleteComment } from "../Features/commentSlice";
+import Action from './Action';
 
 
 
@@ -62,7 +63,6 @@ function Comment() {
       let mainComment = duplicateData.filter(el => el.id === editId)[0];
       let mainCommentReplies = mainComment.replies.slice(0);
       let editedReplyId = mainComment.replies.filter(el => el.id === nestedCommentId)[0];
-      console.log(mainComment);
   
       const editedInfo = {
         "id": editedReplyId.id,
@@ -118,6 +118,8 @@ function Comment() {
       dispatch(endEdit());
     }
   }
+
+
 
   const closeEdit = () => {
     dispatch(endEdit());
@@ -316,7 +318,7 @@ const deleteSelectedComment = (id) => {
 
               {/* ============= Buttons: Reply, Edit & Delete ============= */}
               <div>
-                        {editStarted && editId === comment.id ? (
+                        {/* editStarted && editId === comment.id ? (
                           <div className="user-interaction">
                             <button className="reply-btn" onClick={() => editSelectedComment(false)}>Confirm</button>
                             <button className="edit-btn" onClick={closeEdit}>Cancel</button>
@@ -328,7 +330,8 @@ const deleteSelectedComment = (id) => {
                           </div>
                         ) : (
                           <button className="reply-btn" onClick={() => startCommentReply(comment.id, null, comment.user.username, "comment")}>Reply</button>
-                        )}
+                        ) */}
+                <Action postId={comment.id} isNested={false} nestedId={null} createdBy={comment.user.username} eventNature="comment" editedText={editTextBox} />
               </div>
             </div>
 
@@ -365,7 +368,7 @@ const deleteSelectedComment = (id) => {
 
                       {/* ============= Buttons: Reply, Edit & Delete ============= */}
                       <div>
-                        {nestedEdit && nestedCommentId === reply.id ? (
+                        {/*nestedEdit && nestedCommentId === reply.id ? (
                           <div className="user-interaction">
                             <button className="reply-btn" onClick={() => editSelectedComment(true)}>Confirm</button>
                             <button className="edit-btn" onClick={closeEdit}>Cancel</button>
@@ -377,7 +380,8 @@ const deleteSelectedComment = (id) => {
                           </div>
                         ) : (
                           <button className="reply-btn" onClick={() => startSubCommentReply(comment.id, reply.id, reply.user.username, "reply-to-reply")}>Reply</button>
-                        )}
+                        )*/}
+                        <Action postId={comment.id} isNested={true} nestedId={reply.id} createdBy={reply.user.username} eventNature="reply-to-reply" editedText={editTextBox} />
                       </div>
                     </div>
 

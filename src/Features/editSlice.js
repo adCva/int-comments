@@ -6,32 +6,30 @@ export const editSlice = createSlice({
         edit: false,
         editId: null,
         nestedEdit: false,
-        nestedCommentId: null,
-        textToBeEdited: ""
+        nestedCommentId: null
     },
 
     reducers: {
-      startEdit: (state, action) => {
+      startEdit : (state, action) => {
         state.edit = true;
+        state.editId = action.payload.id;
+      },
+      startNestedEdit : (state, action) => {
+        state.edit = false;
         state.editId = action.payload.id;
         state.nestedEdit = action.payload.isNested;
         state.nestedCommentId = action.payload.nestedComId;
       },
-      startSimpleEdit : (state, action) => {
-        state.edit = true;
-        state.editId = action.payload.id;
-      },
-      endEdit: state => {
+      endEdit: (state) => {
         state.edit = false;
         state.editId = null;
         state.nestedEdit = false;
         state.nestedCommentId = null;
-        state.textToBeEdited = "";
       }
     }
 })
 
 
-export const { startEdit, startSimpleEdit, endEdit } = editSlice.actions;
+export const { startEdit, startNestedEdit, endEdit } = editSlice.actions;
 
 export default editSlice.reducer;

@@ -4,8 +4,6 @@ export const commentSlice = createSlice({
     name: "commentSlice",
     initialState: {
         totalIds: 4,
-        liked: false,
-        disliked: false,
         commentsData: {comments: [
             {
               "id": 1,
@@ -74,53 +72,17 @@ export const commentSlice = createSlice({
             commentsData: newComments
           }
         },
-        addReply: (state, action) => {
-          let newComments = {comments: action.payload.data};
+        changeCommentObject: (state, action) => {
+          let newComments = action.payload.data;
   
           return {
             ...state,
-            commentsData: newComments
-          }
-        },
-        deleteComment : (state, action) => {
-          let newComments = {comments: action.payload.data};
-  
-          return {
-            ...state,
-            commentsData: newComments
-          }
-        },
-        editComment: (state, action) => {
-          let newComments = action.payload.data;
-
-          return {
-            ...state,
-            commentsData: newComments
-          }
-        },
-        addLike: (state, action) => {
-          let newComments = action.payload.data;
-
-          return {
-            ...state,
-            liked: true,
-            disliked: false,
-            commentsData: newComments
-          }
-        },
-        substractLike: (state, action) => {
-          let newComments = action.payload.data;
-
-          return {
-            ...state,
-            liked: false,
-            disliked: true,
             commentsData: newComments
           }
         }
     }
 })
 
-export const { addComment, addReply, deleteComment, editComment, addLike, substractLike } = commentSlice.actions;
+export const { addComment, changeCommentObject } = commentSlice.actions;
 
 export default commentSlice.reducer;
