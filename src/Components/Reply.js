@@ -1,41 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MdCancel } from "react-icons/md";
 // ========= Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { endReply } from "../Features/replySlice";
+import { endReply, updateText } from "../Features/replySlice";
 import { changeCommentObject } from "../Features/commentSlice";
 import { openSimplePop } from "../Features/deleteSlice";
 
 
 function Reply(props) {
-  // ================== Redux dispatch,state & local state.
+  // ================== Redux dispatch & state.
   const dispatch = useDispatch();
   // ===== Reply state.
   const replyId = useSelector(state => state.reply.replyId);
   const replyTo = useSelector(state => state.reply.replyTo);
+  const replyTextState = useSelector(state => state.reply.replyText);
   // ===== General state.
   const commentsData = useSelector(state => state.comments.commentsData);
   const totalIds = useSelector(state => state.comments.totalIds);
   const activeUser = useSelector(state => state.user.activeUser);
-  // ===== Local state.
-  const [ replyText, setReplyText ] = useState("");
 
 
 
   // ==================================== Handle local state change, textarea. ====================================
   const handleChange = (event) => {
-    setReplyText(event.target.value);
+    dispatch(updateText({newText: event.target.value}))
   }
 
 
 
   // ==================================== Cancel reply, close interactive text box. ====================================
   const closeReply = () => {
-    if (replyText.length > 0) {
+    if (replyTextState.length > 0) {
       dispatch(openSimplePop());
     } else {
       dispatch(endReply());
-      setReplyText("");
     }
   }
 
@@ -48,7 +46,7 @@ function Reply(props) {
 
     const newReply = {
         "id": totalIds + 1,
-        "content": replyText,
+        "content": replyTextState,
         "createdAt": "Today",
         "score": 0,
         "replyingTo": replyTo,
@@ -77,7 +75,6 @@ function Reply(props) {
     duplicateData.splice(duplicateData.indexOf(parentElement), 1, updatedParentObject)
     dispatch(changeCommentObject({data: {comments: duplicateData}}));
     dispatch(endReply());
-    setReplyText("");
   }
 
 
@@ -89,7 +86,7 @@ function Reply(props) {
         {/* ============= Username & Textarea ============= */}
         <div className="textarea-container">
             <p>@{replyTo}, </p>
-            <textarea name="comment" value={replyText} onChange={handleChange} />
+            <textarea name="comment" value={replyTextState} onChange={handleChange} />
         </div>
 
         {/* ============= Div (special-container) used for mobile design purposes, otherwise use just reply-buttons ============= */}
@@ -100,7 +97,7 @@ function Reply(props) {
             {/* ============= Buttons ============= */}
             <div className="action-container action-container-column">
               <button className="action-btn cancel-btn" onClick={closeReply}><span><MdCancel /></span>Cancel</button>
-              {replyText.length > 0 ? (
+              {replyTextState.length > 0 ? (
                 <button className="action-btn confirm-btn" onClick={createReply}>Reply</button>
               ) : (
                 <button className="action-btn confirm-btn disabled-btn">Reply</button>

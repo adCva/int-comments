@@ -501,6 +501,7 @@ body {
   border-radius: 10px;
   border: 1px solid #67727e;
   outline: none;
+  cursor: pointer;
 }
 
 .input-container .send-btn {
@@ -570,6 +571,7 @@ body {
   border-radius: 10px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -603,6 +605,7 @@ body {
   border: 1px solid #67727e;
   margin-bottom: 1.5rem;
   height: 80px;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -678,7 +681,7 @@ body {
 }
 
 .nested-reply {
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .likes-container {

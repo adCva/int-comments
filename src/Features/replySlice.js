@@ -7,6 +7,7 @@ export const replySlice = createSlice({
         nestedReplyId: null,
         replyTo: "",
         purpose: null,
+        replyText: ""
     },
 
     reducers: {
@@ -21,11 +22,15 @@ export const replySlice = createSlice({
         state.nestedReplyId = null;
         state.replyTo = "";
         state.purpose = null;
+        state.replyText = "";
+      },
+      updateText: (state, action) => {
+        state.replyText = action.payload.newText;
       }
     }
 })
 
 
-export const { startReply, endReply } = replySlice.actions;
+export const { startReply, endReply, updateText } = replySlice.actions;
 
 export default replySlice.reducer;
