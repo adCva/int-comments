@@ -13,6 +13,8 @@
         align-items: flex-start;
     }
 
+
+    /* ================== Avatar. ================== */
     .user-avatar {
         display: none;
         width: 45px;
@@ -22,6 +24,8 @@
         }
     }
 
+
+    /* ================== Textarea. ================== */
     textarea {
         width: 100%;
         min-width: 200px;
@@ -36,6 +40,8 @@
         cursor: pointer;
     }
 
+
+    /* ================== Send btn. ================== */
     .send-btn {
         display: none;
         background-color: $moderate-blue;
@@ -58,6 +64,8 @@
         }
     }
 
+
+    /* ================== Disable send btn. ================== */
     .disabled-send-btn {
         background-color: darken($light-gray, 20%);
         cursor: default;
@@ -67,6 +75,8 @@
         }
     }
 
+
+    /* ================== Style form mobile elements, img & btn. ================== */
     .mobile-container {
         display: flex;
         justify-content: space-between;

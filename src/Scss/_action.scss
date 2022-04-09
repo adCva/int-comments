@@ -2,6 +2,8 @@
     display: flex;
     gap: 1rem;
 
+
+    /* ================== General btn. ================== */
     .action-btn {
         background: none;
         color: $moderate-blue;
@@ -22,6 +24,8 @@
         }
     }
 
+
+    /* ================== Cancel btn. ================== */
     .cancel-btn {
         color: $dark-blue;
 
@@ -31,6 +35,7 @@
     }
 
 
+    /* ================== Confirm btn. ================== */
     .confirm-btn {
         background-color: $moderate-blue;
         color: $white;
@@ -53,10 +58,14 @@
         }
     }
 
+
+    /* ================== Delete btn. ================== */
     .delete-btn {
         color: $soft-red;
     }
 
+
+    /* ================== Disable btn. ================== */
     .disabled-btn {
         background-color: darken($light-gray, 20%);
         cursor: default;
@@ -69,6 +78,7 @@
 
 
 
+/* ================== Column direction. ================== */
 .action-container-column {
     @media (min-width: 768px) {
         flex-direction: column;

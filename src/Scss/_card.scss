@@ -4,6 +4,8 @@
     margin: 0 auto;
     margin-bottom: 1rem;
 
+
+    /* ================== Card container. ================== */
     .card-container {
         position: relative;
         background-color: $white;
@@ -23,6 +25,8 @@
             gap: 2rem;
         }
 
+
+        /* ================== Likes container. ================== */
         .card-likes {
             width: 110px;
 
@@ -31,6 +35,8 @@
             }
         }
 
+
+        /* ================== Main content. ================== */
         .card-content {
             width: 100%;
             display: flex;
@@ -42,8 +48,8 @@
                 margin-bottom: 0;
             }
 
-            .card-content-identifier {}
 
+            /* ================== Main content text. ================== */
             .card-content-main-text {
                 color: $grayish-blue;
                 letter-spacing: 1px;
@@ -63,6 +69,8 @@
             }
         }
 
+
+        /* ================== Buttons container. ================== */
         .card-buttons {
             position: absolute;
             right: 20px;
@@ -75,6 +83,8 @@
         }
     }
 
+
+    /* ================== Reply box. ================== */
     .card-reply-box {
         display: block;
         margin: 0.5rem 0;
@@ -85,6 +95,7 @@
     }
 
 
+    /* ================== Comment replies wrapper. ================== */
     .card-replies-wrapper {
         border-left: 3px solid lighten($grayish-blue, 40%);
         padding-left: 1rem;
